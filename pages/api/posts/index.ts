@@ -1,6 +1,6 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-import clientPromise from '@/libs/mongodb';
+import { getPosts, insertPost } from '@/services/post-service';
 
 
 const handler = async (
@@ -10,11 +10,8 @@ const handler = async (
 
     if (req.method === 'GET') {
         try {
-            const client = await clientPromise;
-            const db = client.db("posts");
-            const posts = await db.collection("posts").find({}).limit(20).toArray();
-            res.status(201).json(posts);
-
+            const posts = await getPosts();
+            res.status(200).json(posts);
         } catch (err: any) {
             console.log(err);
             const message = err.message;
@@ -22,16 +19,7 @@ const handler = async (
         }
     } else if (req.method === 'POST') {
         try {
-            console.log(req.body);
-            const client = await clientPromise;
-            const db = client.db("posts");
-            const { title, content } = req.body;
-
-            const post = await db.collection("posts").insertOne({
-                title,
-                content,
-            });
-
+            const post = await insertPost(req.body);
             res.status(201).json(post);
         } catch (err: any) {
             console.log(err);
