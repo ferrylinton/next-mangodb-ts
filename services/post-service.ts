@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import clientPromise from "@/libs/mongodb";
+import clientPromise from "@/db/connection";
 
 
 const POSTS = "posts";

@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "initdb": "ts-node -r tsconfig-paths/register initdb.ts",
+    "init:schema": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register db/init-schema.ts",
+    "init:data": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register db/init-data.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -14,6 +15,7 @@
     "@types/react": "18.0.33",
     "@types/react-dom": "18.0.11",
     "autoprefixer": "10.4.14",
+    "bcrypt": "^5.1.0",
     "eslint": "8.37.0",
     "eslint-config-next": "13.3.0",
     "mongodb": "^5.2.0",
@@ -25,6 +27,8 @@
     "typescript": "5.0.3"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0"
