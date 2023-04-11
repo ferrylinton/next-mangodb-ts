@@ -5,6 +5,7 @@
   "scripts": {
     "init:schema": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register db/init-schema.ts",
     "init:data": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register db/init-data.ts",
+    "query": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register db/query.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

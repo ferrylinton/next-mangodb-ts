@@ -18,3 +18,8 @@ export const getUsers = async (): Promise<any> => {
     const client = await clientPromise;
     return await client.db().collection(COLLECTION_USERS).find({}).limit(20).toArray();
 }
+
+export const findOneByEmail = async (email: string): Promise<any> => {
+    const client = await clientPromise;
+    return await client.db().collection(COLLECTION_USERS).findOne({email});
+}
