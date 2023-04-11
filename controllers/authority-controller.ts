@@ -5,8 +5,10 @@ import * as authorityService from "@/services/authority-service";
 export const find = async (req: NextApiRequest,
     res: NextApiResponse) => {
     try {
-        const authorities = await authorityService.find();
-        console.log(authorities);
+        const keyword = req.query.keyword as string;
+        const page = req.query.page as string;
+
+        const authorities = await authorityService.find(keyword, parseInt(page || '1'));
         res.status(200).json(authorities);
     } catch (err: any) {
         console.error(err);
@@ -18,7 +20,7 @@ export const find = async (req: NextApiRequest,
 export const findOneById = async (req: NextApiRequest,
     res: NextApiResponse) => {
     try {
-        const { id } = req.query;
+        const id = req.query.id as string;
         const authority = await authorityService.findOneById(id);
 
         if(authority){

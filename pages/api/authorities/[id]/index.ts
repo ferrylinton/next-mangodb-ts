@@ -11,15 +11,15 @@ const handler = async (
 
     switch (method) {
         case 'GET':
-            authorityController.findOneById(req, res);
+            await authorityController.findOneById(req, res);
             break;
 
         case 'PUT':
-            authorityController.update(req, res);
+            await authorityController.update(req, res);
             break;
 
         case 'DELETE':
-            authorityController.deleteOneById(req, res);
+            await authorityController.deleteOneById(req, res);
             break;
 
         default:
