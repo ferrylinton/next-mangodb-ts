@@ -1,13 +1,13 @@
 import 'dotenv/config';
-import { insertAuthority } from '@/services/authority-service';
+import * as authorityService from '@/services/authority-service';
 import { insertRole } from '@/services/role-service';
 import { insertUser } from '@/services/user-service';
 
 
 (async () => {
     try {
-        const authorityUserManagementModify = await insertAuthority({"name": "USER_MANAGEMENT_MODIFY"});
-        const authorityUserManagementRead = await insertAuthority({"name": "USER_MANAGEMENT_READ"});
+        const authorityUserManagementModify = await authorityService.save({"name": "USER_MANAGEMENT_MODIFY"});
+        const authorityUserManagementRead = await authorityService.save({"name": "USER_MANAGEMENT_READ"});
        
         const roleAdmin = await insertRole({
             "name": "ADMIN",

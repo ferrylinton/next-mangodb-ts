@@ -1,10 +1,10 @@
 import { ObjectId } from "mongodb";
 import clientPromise from "@/db/connection";
 import { COLLECTION_AUTHORITIES } from "@/db/constant";
+import { PAGE_SIZE } from "./constant";
 
-const PAGE_SIZE = 10;
 
-export const find = async (keyword: string, page: number): Promise<any> => { 
+export const find = async (keyword: string, page: number): Promise<any> => {
     const pipeline = [
         {
             '$match': {
@@ -24,9 +24,9 @@ export const find = async (keyword: string, page: number): Promise<any> => {
                     'name': '$name'
                 }
             }
-        },{
+        }, {
             '$sort': {
-              'name': -1
+                'name': -1
             }
         }, {
             '$facet': {
@@ -43,12 +43,31 @@ export const find = async (keyword: string, page: number): Promise<any> => {
                     }
                 ]
             }
+        }, {
+            '$unwind': '$pagination'
         }
     ];
 
     const client = await clientPromise;
-    
-    return await client.db().collection(COLLECTION_AUTHORITIES).aggregate(pipeline).toArray();
+    const arr = await client.db().collection(COLLECTION_AUTHORITIES).aggregate(pipeline).toArray();
+
+    if(arr.length){
+        const result = arr[0];
+        result.pagination.page = page;
+        result.pagination.pageSize = PAGE_SIZE;
+        result.pagination.keyword = keyword;
+        return result;
+    }else{
+        return {
+            data: [],
+            pagination: {
+                count: 0,
+                page,
+                pageSize: PAGE_SIZE,
+                keyword
+            }
+        }
+    }
 }
 
 export const findOneById = async (id: string): Promise<any> => {
