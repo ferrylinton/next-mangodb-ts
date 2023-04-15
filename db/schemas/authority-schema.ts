@@ -9,9 +9,7 @@ export const createAuthoritySchema = async (client: MongoClient, collectionNames
                 storageEngine: {
                     wiredTiger: {},
                 },
-                capped : true, 
-                size : 200000, 
-                max : 100,
+                capped : false,
                 validator: {
                     $jsonSchema: {
                         bsonType: "object",

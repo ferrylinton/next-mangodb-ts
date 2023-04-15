@@ -12,8 +12,8 @@ import { insertUser } from '@/services/user-service';
         const roleAdmin = await insertRole({
             "name": "ADMIN",
             "authorityIds": [
-                authorityUserManagementModify._id,
-                authorityUserManagementRead._id
+                authorityUserManagementModify.id,
+                authorityUserManagementRead.id
             ]
         });
 

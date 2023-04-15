@@ -2,6 +2,7 @@ import { ObjectId } from "mongodb";
 import clientPromise from "@/db/connection";
 import { COLLECTION_AUTHORITIES } from "@/db/constant";
 import { PAGE_SIZE } from "./constant";
+import { Authority } from "@/models/authority-model";
 
 
 export const find = async (keyword: string, page: number): Promise<any> => {
@@ -51,13 +52,13 @@ export const find = async (keyword: string, page: number): Promise<any> => {
     const client = await clientPromise;
     const arr = await client.db().collection(COLLECTION_AUTHORITIES).aggregate(pipeline).toArray();
 
-    if(arr.length){
+    if (arr.length) {
         const result = arr[0];
         result.pagination.page = page;
         result.pagination.pageSize = PAGE_SIZE;
         result.pagination.keyword = keyword;
         return result;
-    }else{
+    } else {
         return {
             data: [],
             pagination: {
@@ -86,21 +87,25 @@ export const findOneById = async (id: string): Promise<any> => {
 
 
     const client = await clientPromise;
-    const authority = await client.db().collection(COLLECTION_AUTHORITIES).findOne(filter, options);
+    const authority = await client.db().collection(COLLECTION_AUTHORITIES).findOne(filter, options) as Authority;
 
     if (authority) {
+        delete authority._id;
         return { id, ...authority };
     } else {
         return null;
     }
 }
 
-export const save = async (body: any): Promise<any> => {
+export const save = async (authority: any): Promise<any> => {
     const client = await clientPromise;
-    const { insertedId } = await client.db().collection(COLLECTION_AUTHORITIES).insertOne(body);
-    return await client.db().collection(COLLECTION_AUTHORITIES).findOne({
-        _id: new ObjectId(insertedId),
-    });
+    const { insertedId: id } = await client.db().collection(COLLECTION_AUTHORITIES).insertOne(authority);
+    if(id){
+        delete authority._id;
+        return { id, ...authority };
+    }
+
+    return null;
 }
 
 export const update = async (id: string | string[] | undefined, body: any): Promise<any> => {
@@ -135,9 +140,11 @@ export const deleteOneById = async (id: string | string[] | undefined): Promise<
     });
 
     if (authority) {
-        await client.db().collection(COLLECTION_AUTHORITIES).deleteOne({
+        const { deletedCount } = await client.db().collection(COLLECTION_AUTHORITIES).deleteOne({
             _id: new ObjectId(id?.toString())
         });
+
+        console.log(`authority, id=${id}, deletedCount=${deletedCount}`)
 
         return authority;
     }

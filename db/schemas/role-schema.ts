@@ -9,9 +9,7 @@ export const createRoleSchema = async (client: MongoClient, collectionNames: Str
                 storageEngine: {
                     wiredTiger: {},
                 },
-                capped : true, 
-                size : 200000, 
-                max : 100,
+                capped : false,
                 validator: {
                     $jsonSchema: {
                         bsonType: "object",
