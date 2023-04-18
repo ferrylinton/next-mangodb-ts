@@ -1,0 +1,16 @@
+{
+    "required": "{{field}} is required",
+    "min": "{{field}} must be at least {{length}} characters",
+    "max": "The maximum number of {{field}} is {{length}} characters",
+    "len": "{{field}} must be {{length}} characters",
+    "numeric": "{{field}} is not valid (must be number)",
+    "alphanumeric": "{{field}} is not valid (must be number and letter)",
+    "letter": "{{field}} is not valid (must be letter)",
+    "invalidConfirmPassword": "Confirm Password is not match",
+    "registrationSuccessful": "New user registration is successful",
+    "registrationFailed": "New user registration is failed",
+    "newPasswordSuccessful": "New password is saved successful",
+    "newPasswordFailed": "New password is failed to save",
+    "logoutConfirmation": "Are you sure to logout?",
+    "loading": "Loading ..."
+}

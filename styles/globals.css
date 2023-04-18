@@ -2,3 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --app-primary-color: #1e40af;
+    --app-secondary-color: #22C55E;
+}
+
+.default {
+    --app-primary-color: #1e40af;
+    --app-secondary-color: #22C55E;
+}
+
+.dark {
+    --app-primary-color: #000000;
+    --app-secondary-color: #22C55E;
+}
+

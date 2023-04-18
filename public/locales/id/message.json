@@ -1,0 +1,16 @@
+{
+    "required": "{{field}} harus diisi",
+    "min": "Panjang {{field}} minimal {{length}} karakter",
+    "max": "Panjang {{field}} maksimal {{length}} karakter",
+    "len": "Panjang {{field}} harus {{length}} karakter",
+    "numeric": "Format {{field}} tidak sesuai (harus numerik)",
+    "alphanumeric": "Format {{field}} tidak sesuai (harus alfanumerik)",
+    "letter": "Format {{field}} tidak sesuai (harus huruf)",
+    "invalidConfirmPassword": "Konfirmasi Kata Sandi tidak sesuai",
+    "registrationSuccessful": "Pendaftaran pengguna baru berhasil",
+    "registrationFailed": "Pendaftaran pengguna baru gagal",
+    "newPasswordSuccessful": "Kata sandi baru berhasil disimpan",
+    "newPasswordFailed": "Kata sandi baru gagal disimpan",
+    "logoutConfirmation": "Apakah anda yakin untuk keluar?",
+    "loading": "Sedang diproses ..."
+}
